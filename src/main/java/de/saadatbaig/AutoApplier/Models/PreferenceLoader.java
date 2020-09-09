@@ -1,7 +1,12 @@
 package de.saadatbaig.AutoApplier.Models;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class PreferenceLoader {
@@ -21,6 +26,46 @@ public class PreferenceLoader {
         _config = new Properties();
     }
 
+
+    /**
+     * Load arbitrary Configurations.
+     * @param configName Alternate config name to load.
+     * @return 0 if successful, 1 if not.
+     */
+    public int loadPrefs(@Nullable String configName) {
+        String fn;
+        try {
+            fn = (configName == null) ? STANDARD_PREFS_NAME : configName;
+            FileInputStream fs = new FileInputStream(LOCAL_DIR + "/" + fn);
+            BufferedInputStream bs = new BufferedInputStream(fs);
+            if (configName == null) { _defaults.load(bs); }
+            else { _config.load(bs); }
+            bs.close();
+            fs.close();
+            return 0;
+        } catch(IOException | SecurityException exception) {
+            exception.printStackTrace();
+            return 1;
+        }
+    }
+
+    /**
+     * Save currently loaded prefs.
+     * @return 0 if success, else 1
+     */
+    public int savePrefs(@Nullable String configName) {
+        String fn;
+        try {
+            fn = (configName == null) ? STANDARD_PREFS_NAME : configName;
+            FileOutputStream fs = new FileOutputStream(LOCAL_DIR + "/" + fn);
+            if (configName == null) { _defaults.store(fs, null); }
+            else { _config.store(fs, null); }
+            fs.close();
+            return 0;
+        } catch (IOException | SecurityException exception) {
+            return 1;
+        }
+    }
 
     /**
      * Fetch values from the loaded prefs.
