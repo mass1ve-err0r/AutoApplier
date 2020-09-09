@@ -36,6 +36,33 @@ public class DOCXManager {
         }
     }
 
+    /**
+     * Replace variables with custom mappings and save file.
+     * @param fName Outfile's name.
+     * @param replacements HashMap with the replacement mappings.
+     * @return 0 if successful, 1 if not.
+     */
+    public int replaceVariables(@NonNull String fName, Map<String, String> replacements) {
+        try {
+            VariablePrepare.prepare(_processor);
+            _processor.getMainDocumentPart().variableReplace(replacements);
+            File outf = new File(_fPath + "/" + fName + ".docx");
+            _processor.save(outf);
+            return 0;
+        } catch (Exception excep) {
+            excep.printStackTrace(); // debug
+            System.out.println("ok?");
+            return 1;
+        }
+    }
+
+    /**
+     * (Paranoia) Close off the processing handle.
+     */
+    public void closeDocument() {
+        _processor = null;
+    }
+
 
     /* End */
 }
