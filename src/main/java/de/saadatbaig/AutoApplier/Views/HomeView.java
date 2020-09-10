@@ -39,6 +39,13 @@ public class HomeView {
     ///////////////////////////////////////////////////////////////////////////
     private final String VARS_TITLE = "Replacements are already present";
     private final String VARS_MSG = "Would you like to keep them?";
+    private final String VARS_MSG2 = "Are you sure to clear the Pairs?";
+    private final String F_TITLE = "Enter File suffix";
+    private final String EDITOR_TITLE = "Edit Field";
+    private final String F_CONTENT_TEXT = "Suffix:";
+    private final String EDITOR_CONTENT_TEXT = "Value:";
+    private final String F_HDR_TEXT = "Please add a file suffix to easier identify the output file.";
+    private final String EDITOR_HDR_TEXT = "Enter a new value for the selected field.";
     private final int MOUSE_DOUBLECLICK = 2;
 
     /**
@@ -151,11 +158,20 @@ public class HomeView {
         });
     }
 
+    /**
+     * Clear the pairings.
+     * @param evt Event.
+     */
     @FXML
     public void clearPairs(ActionEvent evt) {
-        _controller.clearLists();
+        boolean b = areYouSurePrompt(VARS_TITLE, VARS_MSG2);
+        if (b) { _controller.clearLists(); }
     }
 
+    /**
+     * Start the replacing & saving.
+     * @param evt Event.
+     */
     @FXML
     public void startProcedure(ActionEvent evt) {
         System.out.println("startProcedure");
@@ -179,10 +195,7 @@ public class HomeView {
      * @param idx Field index in the list.
      */
     public void editValuePrompt(boolean isKeys, int idx) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Edit Field");
-        dialog.setContentText("Value:");
-        dialog.setHeaderText("Enter a new value for the selected field");
+        TextInputDialog dialog = createTextInputDialog(EDITOR_TITLE, EDITOR_CONTENT_TEXT, EDITOR_HDR_TEXT);
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(str -> {
             _controller.editInList(isKeys, idx, str);
@@ -195,6 +208,21 @@ public class HomeView {
     public void refreshLists() {
         lvKeys.refresh();
         lvVals.refresh();
+    }
+
+    /**
+     * Generic Dialog creator. Self-Explanatory.
+     * @param title Title.
+     * @param cText Content Text.
+     * @param hText Header Text.
+     * @return A pre-setup TextInputDialog.
+     */
+    private TextInputDialog createTextInputDialog(@NonNull String title, @NonNull String cText, @NonNull String hText) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(title);
+        dialog.setContentText(cText);
+        dialog.setHeaderText(hText);
+        return dialog;
     }
 
 
