@@ -1,5 +1,6 @@
 package de.saadatbaig.AutoApplier.Views;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import de.saadatbaig.AutoApplier.Controllers.HomeViewController;
 
 import javafx.application.Platform;
@@ -13,12 +14,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-
 import java.io.File;
 import java.util.Optional;
 
 public class HomeView {
 
+    ///////////////////////////////////////////////////////////////////////////
+    // FXMLs + Vars
+    ///////////////////////////////////////////////////////////////////////////
     @FXML public AnchorPane rootView;
     @FXML public Button btnPickBase;
     @FXML public Button btnClear;
@@ -30,6 +33,13 @@ public class HomeView {
     @FXML public ListView<String> lvKeys;
     @FXML public ListView<String> lvVals;
     private HomeViewController _controller;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // MAGICS
+    ///////////////////////////////////////////////////////////////////////////
+    private final String VARS_TITLE = "Replacements are already present";
+    private final String VARS_MSG = "Would you like to keep them?";
+    private final int MOUSE_DOUBLECLICK = 2;
 
     /**
      * Reference to our controller.
@@ -44,14 +54,14 @@ public class HomeView {
     public void lateInit() {
         lvKeys.setItems(_controller._kvManager._keys);
         lvKeys.setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 2 && !lvKeys.getItems().isEmpty()) {
+            if (evt.getClickCount() == MOUSE_DOUBLECLICK && !lvKeys.getItems().isEmpty()) {
                 int sel_idx = lvKeys.getSelectionModel().getSelectedIndex();
                 if (sel_idx != -1) { editValuePrompt(true, sel_idx); }
             }
         });
         lvVals.setItems(_controller._kvManager._vals);
         lvVals.setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 2 && !lvVals.getItems().isEmpty()) {
+            if (evt.getClickCount() == MOUSE_DOUBLECLICK && !lvVals.getItems().isEmpty()) {
                 int sel_idx = lvVals.getSelectionModel().getSelectedIndex();
                 if (sel_idx != -1) { editValuePrompt(false, sel_idx); }
             }
@@ -78,7 +88,7 @@ public class HomeView {
             if (lvKeys.getItems().isEmpty()) {
                 _controller.initDocx(false, rv.getAbsolutePath());
             } else {
-                boolean b = saveVariablesPrompt();
+                boolean b = areYouSurePrompt(VARS_TITLE, VARS_MSG);
                 _controller.initDocx(b, rv.getAbsolutePath());
             }
         }
@@ -95,7 +105,6 @@ public class HomeView {
         int v_idx = lvVals.getSelectionModel().getSelectedIndex();
         int idx = (k_idx == -1) ? v_idx : k_idx;
         _controller.removeFromLists(idx);
-        System.out.println("removeReplPair");
     }
 
 
@@ -144,7 +153,7 @@ public class HomeView {
 
     @FXML
     public void clearPairs(ActionEvent evt) {
-        System.out.println("clearPairs");
+        _controller.clearLists();
     }
 
     @FXML
@@ -153,13 +162,13 @@ public class HomeView {
     }
 
     /**
-     * Dialog to ask whether to keep the existing replacement pairs or discard them.
-     * @return true if you'd want to keep them, else false.
+     * Dialog to make sure the user agrees to the action.
+     * @return true or false.
      */
-    public boolean saveVariablesPrompt() {
+    public boolean areYouSurePrompt(@NonNull String title, @NonNull String msg) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Replacements are already present");
-        alert.setContentText("Would you like to keep them?");
+        alert.setTitle(title);
+        alert.setContentText(msg);
         alert.showAndWait();
         return alert.getResult() == ButtonType.YES;
     }
