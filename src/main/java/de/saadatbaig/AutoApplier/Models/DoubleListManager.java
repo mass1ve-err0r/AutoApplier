@@ -86,6 +86,20 @@ public class DoubleListManager {
         return _keys.isEmpty();
     }
 
+    /**
+     * Edit values on-the-fly as well.
+     * @param editingKeys flag to check which list is being edited.
+     * @param target_idx index to replace at.
+     * @param replacement replacement string.
+     */
+    public void editValueAtIndex(boolean editingKeys, int target_idx, @NonNull String replacement) {
+        if (editingKeys) {
+            _keys.set(target_idx, replacement);
+        } else {
+            _vals.set(target_idx, replacement);
+        }
+    }
+
 
     /* End */
 }
