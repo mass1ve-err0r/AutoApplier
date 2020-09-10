@@ -78,6 +78,14 @@ public class DoubleListManager {
         _vals.clear();
     }
 
+    /**
+     * Quick wrapper for checking if we even have pairings.
+     * @return true if empty, false if at least one element is present.
+     */
+    public boolean isEmpty() {
+        return _keys.isEmpty();
+    }
+
 
     /* End */
 }
