@@ -23,7 +23,7 @@
       </TextField>
       <TextField fx:id="tfFPath" editable="false" layoutX="200" layoutY="200" prefHeight="32.0" promptText="fpath" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="72.0">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </TextField>
       <ListView fx:id="lvKeys" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="176.0" />
