@@ -38,5 +38,10 @@
             <Font size="16.0" />
          </font>
       </Button>
+      <Button fx:id="btnClear" mnemonicParsing="false" onAction="#clearPairs" prefHeight="32.0" text="CLEAR" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="124.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
