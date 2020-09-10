@@ -31,8 +31,16 @@ public class HomeView {
     @FXML public ListView<String> lvVals;
     private HomeViewController _controller;
 
+    /**
+     * Reference to our controller.
+     * @param c HomeViewController to reference.
+     */
     public void assignController(HomeViewController c) { _controller = c; }
 
+    /**
+     * Late initializer for when JFX elements are available.
+     * Intentionally created this instead of overriding initialize().
+     */
     public void lateInit() {
         lvKeys.setItems(_controller._kvManager._keys);
         lvKeys.setOnMouseClicked(evt -> {
@@ -51,6 +59,10 @@ public class HomeView {
     }
 
 
+    /**
+     * File selection Dialog. Self-Explanatory.
+     * @param evt Event.
+     */
     @FXML
     public void openFilePickerDialog(ActionEvent evt) {
         FileChooser fc = new FileChooser();
@@ -72,6 +84,11 @@ public class HomeView {
         }
     }
 
+    /**
+     * Removes a KV-Pair from the list, regardless which side you click on.
+     * Will always delete the associated key/ value as well.
+     * @param evt Event.
+     */
     @FXML
     public void removeReplPair(ActionEvent evt) {
         int k_idx = lvKeys.getSelectionModel().getSelectedIndex();
@@ -135,6 +152,10 @@ public class HomeView {
         System.out.println("startProcedure");
     }
 
+    /**
+     * Dialog to ask whether to keep the existing replacement pairs or discard them.
+     * @return true if you'd want to keep them, else false.
+     */
     public boolean saveVariablesPrompt() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Replacements are already present");
@@ -143,6 +164,11 @@ public class HomeView {
         return alert.getResult() == ButtonType.YES;
     }
 
+    /**
+     * Editing Dialog which optionally edits the field in question.
+     * @param isKeys If it's the Key list.
+     * @param idx Field index in the list.
+     */
     public void editValuePrompt(boolean isKeys, int idx) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Edit Field");
