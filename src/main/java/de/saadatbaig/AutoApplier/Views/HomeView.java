@@ -82,9 +82,47 @@ public class HomeView {
     }
 
 
+    /**
+     * Following code is courtesy of Stack-Overflow and code.makery!
+     * (Adapted for my own needs)
+     * ref 1: https://code.makery.ch/blog/javafx-dialogs-official/
+     * ref 2: https://stackoverflow.com/a/31556716
+     * @param evt event.
+     */
     @FXML
     public void addReplPair(ActionEvent evt) {
-        System.out.println("addReplPair");
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Add Replacement Pair");
+        ButtonType btnConfirm = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
+
+        TextField tfKey = new TextField();
+        tfKey.setPromptText("myVar");
+        TextField tfVal = new TextField();
+        tfVal.setPromptText("myValueForIt");
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 150, 10, 10));
+        gridPane.add(new Label("Variable:"), 0, 0);
+        gridPane.add(tfKey, 1, 0);
+        gridPane.add(new Label("Replacement:"), 0, 1);
+        gridPane.add(tfVal, 1, 1);
+        dialog.getDialogPane().setContent(gridPane);
+
+        Platform.runLater(() -> tfKey.requestFocus());
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == btnConfirm) {
+                return new Pair<>(tfKey.getText(), tfVal.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+        result.ifPresent(pair -> {
+            _controller.addToLists(pair.getKey(), pair.getValue());
+        });
     }
 
     @FXML
