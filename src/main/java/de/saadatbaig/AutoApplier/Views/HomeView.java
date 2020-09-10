@@ -33,6 +33,31 @@ public class HomeView {
     }
 
 
+    @FXML
+    public void removeReplPair(ActionEvent evt) {
+        //TODO: Catch no-selection case.
+        int k_idx = lvKeys.getSelectionModel().getSelectedIndex();
+        int v_idx = lvVals.getSelectionModel().getSelectedIndex();
+        int idx = (k_idx == -1) ? v_idx : k_idx;
+        _controller.removeFromLists(idx);
+        System.out.println("removeReplPair");
+    }
+
+
+    @FXML
+    public void addReplPair(ActionEvent evt) {
+        System.out.println("addReplPair");
+    }
+
+    @FXML
+    public void clearPairs(ActionEvent evt) {
+        System.out.println("clearPairs");
+    }
+
+    @FXML
+    public void startProcedure(ActionEvent evt) {
+        System.out.println("startProcedure");
+    }
 
 
     /* End */
