@@ -25,6 +25,7 @@ public class HomeView {
     @FXML public AnchorPane rootView;
     @FXML public Button btnPickBase;
     @FXML public Button btnClear;
+    @FXML public Button btnLoad;
     @FXML public Button btnAddVar;
     @FXML public Button btnRemVar;
     @FXML public Button btnExec;
@@ -42,10 +43,13 @@ public class HomeView {
     private final String VARS_MSG2 = "Are you sure to clear the Pairs?";
     private final String F_TITLE = "Enter File suffix";
     private final String EDITOR_TITLE = "Edit Field";
+    private final String CNF_TITLE = "Load Configuration";
     private final String F_CONTENT_TEXT = "Suffix:";
     private final String EDITOR_CONTENT_TEXT = "Value:";
+    private final String CNF_CONTENT_TEXT = "File Name:";
     private final String F_HDR_TEXT = "Please add a file suffix to easier identify the output file.";
     private final String EDITOR_HDR_TEXT = "Enter a new value for the selected field.";
+    private final String CNF_HDR_TEXT = "Enter the name of the configuration file to load.";
     private final int MOUSE_DOUBLECLICK = 2;
 
     /**
@@ -175,6 +179,19 @@ public class HomeView {
     @FXML
     public void startProcedure(ActionEvent evt) {
         customFileSuffix();
+    }
+
+    /**
+     * Load Keys/ Vars from prefs.
+     * @param evt Event.
+     */
+    @FXML
+    public void loadKeysFromPrefs(ActionEvent evt) {
+        TextInputDialog dialog = createTextInputDialog(CNF_TITLE, CNF_CONTENT_TEXT, CNF_HDR_TEXT);
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(str -> {
+            _controller.getKeysFromConfig(str);
+        });
     }
 
     /**
