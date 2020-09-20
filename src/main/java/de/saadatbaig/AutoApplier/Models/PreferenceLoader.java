@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Map;
+import java.util.Set;
 
 public class PreferenceLoader {
 
@@ -44,7 +46,6 @@ public class PreferenceLoader {
             fs.close();
             return 0;
         } catch(IOException | SecurityException exception) {
-            exception.printStackTrace();
             return 1;
         }
     }
@@ -87,6 +88,14 @@ public class PreferenceLoader {
         } else {
             _config.setProperty(key, val);
         }
+    }
+
+    /**
+     * (Convenience) Grab a custom configurations kv-set.
+     * @return struct of type Set(Entry(String, String))
+     */
+    public Set<Map.Entry<Object, Object>> loadConfigVals() {
+        return _config.entrySet();
     }
 
 
