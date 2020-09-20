@@ -1,0 +1,5 @@
+# This is an example config file
+stdUserName = Saadat
+billingAddress = Some Address 123
+website = saadat.dev
+your_Variable = your Value
