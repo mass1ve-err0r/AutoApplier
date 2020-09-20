@@ -7,6 +7,8 @@ import de.saadatbaig.AutoApplier.Models.DoubleListManager;
 import de.saadatbaig.AutoApplier.Models.PreferenceLoader;
 import de.saadatbaig.AutoApplier.Views.HomeView;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class HomeViewController {
 
@@ -26,6 +28,7 @@ public class HomeViewController {
     private final String ERR_MSG_NODOC = "Document is not set!";
     private final String ERR_TITLE_NOVARS = "Replacement Error";
     private final String ERR_MSG_NOVARS = "You have no Replacements set!";
+    private final String DEFAULT_VALUE = "__empty__";
 
     /**
      * Standard ctor, takes View as param to reference.
@@ -95,6 +98,19 @@ public class HomeViewController {
      */
     public void clearLists() {
         _kvManager.flush();
+    }
+
+    /**
+     * (Wrapper) Load a custom preset for easier replacement.
+     * @param configName File name without suffix.
+     */
+    public void getKeysFromConfig(@NonNull String configName) {
+        _prefs.loadPrefs(configName + ".aaconf");
+        Set<Map.Entry<Object, Object>> set = _prefs.loadConfigVals();
+        for (Map.Entry<Object, Object> x: set) {
+            String v = ((String) x.getValue()).isEmpty() ? DEFAULT_VALUE : (String)x.getValue();
+            _kvManager.addElement((String)x.getKey(), v);
+        }
     }
 
 
