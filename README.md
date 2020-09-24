@@ -29,7 +29,7 @@ AutoApplier comes as _shaded_ JAR, meaning it includes all the necessary JavaFX 
 #### Instructions for self-compiling:
 *I am assuming you're using IntelliJ as your IDE of choice for Java.*
 
-1. clone this project (`git clone https://github.com/mass1ve-err0r/AutoApplier.git`)
+1. clone this project (For Java 11 just `git clone https://github.com/mass1ve-err0r/AutoApplier.git`, for Java 8 use `git clone -b Java8 https://github.com/mass1ve-err0r/AutoApplier.git`)
 2. Grab a JDK of your choice to build the Project (8 or 11, newer ones aren't recommended due to some potential internal problems, see [THIS](https://stackoverflow.com/a/56064482)).
 3. Open it up with intelliJ, open the Maven toolbar and select `Package` from the lifecycle.
 4. It should now have built a fully shaded JAR for you inside the `target` folder to use without opening the IDE every time.
