@@ -6,7 +6,10 @@ import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Map;
+
+import static org.docx4j.Docx4J.toPDF;
 
 public class DOCXManager {
 
@@ -47,6 +50,7 @@ public class DOCXManager {
             VariablePrepare.prepare(_processor);
             _processor.getMainDocumentPart().variableReplace(replacements);
             File outf = new File(_fPath + "/" + fName + ".docx");
+            toPDF(_processor, new FileOutputStream(_fPath + "/" + fName + ".pdf"));
             _processor.save(outf);
             return 0;
         } catch (Exception excep) {
