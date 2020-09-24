@@ -26,12 +26,21 @@ If you have feedback or just want to shoutout, hit me up on Twitter @saadat603 :
 #### Info:
 AutoApplier comes as _shaded_ JAR, meaning it includes all the necessary JavaFX components so you don't have to add anything or provide anything at all in that regard. 
 
-#### Prerequesites:
-Minimum JRE 8 or 11, depending on your case.
+#### Instructions for self-compiling:
+*I am assuming you're using IntelliJ as your IDE of choice for Java.*
 
-Click or Tap [HERE](d) to download the **Java 11** Version. (Compiled with AdoptOpenJDK 11)
+1. clone this project (`git clone https://github.com/mass1ve-err0r/AutoApplier.git`)
+2. Grab a JDK of your choice to build the Project (8 or 11, newer ones aren't recommended due to some potential internal problems, see [THIS](https://stackoverflow.com/a/56064482)).
+3. Open it up with intelliJ, open the Maven toolbar and select `Package` from the lifecycle.
+4. It should now have built a fully shaded JAR for you inside the `target` folder to use without opening the IDE every time.
 
-Click or Tap [HERE](d) to download the **Java 8** Version. (Compiled with AdoptOpenJDK 8)
+At this point you're free to place the application / `JAR` anywhere you like because it's portable for *your system*.
+
+#### Prebuilt Images:
+I provide the following *working\** images with their respective specs:
+
+- macOS (10.15.6 Catalina, AdoptOpenJDK 11.0.8) : Click [HERE](x)
+- Windows (Win10, AdoptOpenJDK 11.0.8) : Click [HERE](x2)
 
 ## F.A.Q
 #### *Q: How does it work \*exactly\*???*
@@ -56,7 +65,14 @@ A: In no other way than the dependencies being a tad different since docx4j has 
 
 ## Credits:
 - docx4j Team for their amazing work
-- OpenJFX for maintaining JavaFX
+- Apache 
 - JetBrains for their amazing IDE
 - My swedish pigeon gang for the true support™️
 - My friends and family
+
+## License
+This product uses the docx4j library which is licensed under the *Apache Software License 2.0* (ASL v2.0).
+
+The product `AutoApplier` as a whole is hereby licensed under the *GNU Affero General Public License 3.0* (AGPL v3.0).
+
+A copy of the License is included in this repository.
