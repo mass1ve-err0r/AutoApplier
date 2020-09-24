@@ -9,23 +9,23 @@
     <version>1.0</version>
 
     <dependencies>
-        <!-- docx4j (Java11 variant) -->
+        <!-- docx4j (Java 8 variant) -->
         <dependency>
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j-core</artifactId>
-            <version>11.1.8</version>
+            <version>8.2.3</version>
         </dependency>
         <!-- JAXB Type -->
         <dependency>
             <groupId>org.docx4j</groupId>
-            <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
-            <version>11.1.8</version>
+            <artifactId>docx4j-JAXB-Internal</artifactId>
+            <version>8.2.3</version>
         </dependency>
         <!-- Apache FOP Based Conversion to PDF -->
         <dependency>
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j-export-fo</artifactId>
-            <version>11.1.8</version>
+            <version>8.2.3</version>
         </dependency>
 
         <!-- SLF4J -->
@@ -40,28 +40,7 @@
             <version>2.0.0-alpha1</version>
         </dependency>
 
-        <!-- JavaFX 11 -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx</artifactId>
-            <version>11</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>11</version>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -82,8 +61,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
