@@ -178,7 +178,11 @@ public class HomeView {
      */
     @FXML
     public void startProcedure(ActionEvent evt) {
-        customFileSuffix();
+        TextInputDialog dialog = createTextInputDialog(F_TITLE, F_CONTENT_TEXT, F_HDR_TEXT);
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(str -> {
+            _controller.startReplacingAndSave(str);
+        });
     }
 
     /**
@@ -216,18 +220,6 @@ public class HomeView {
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(str -> {
             _controller.editInList(isKeys, idx, str);
-        });
-    }
-
-    /**
-     * Dialog to fetch a custom file suffix and then proceed with replacing and saving
-     * the document.
-     */
-    public void customFileSuffix() {
-        TextInputDialog dialog = createTextInputDialog(F_TITLE, F_CONTENT_TEXT, F_HDR_TEXT);
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(str -> {
-            _controller.startReplacingAndSave(str);
         });
     }
 
