@@ -1,6 +1,10 @@
 # AutoApplier
 > Java 8 + 11 | Easy UI & UX
 
+
+![img1](https://github.com/mass1ve-err0r/AutoApplier/blob/master/GitImages/AutpApplier1.png)
+
+
 ## Preamble
 I found that certain billing or templating software/ services charge too much and while logically swapping out variables for values (provided by the user) is a simple task, the pricing is atrocious.
 
