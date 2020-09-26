@@ -9,6 +9,7 @@ import de.saadatbaig.AutoApplier.Views.HomeView;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import static javafx.scene.control.Alert.AlertType;
 
 public class HomeViewController {
 
@@ -28,7 +29,11 @@ public class HomeViewController {
     private final String ERR_MSG_NODOC = "Document is not set!";
     private final String ERR_TITLE_NOVARS = "Replacement Error";
     private final String ERR_MSG_NOVARS = "You have no Replacements set!";
+    private final String ERR_TITLE_TASK = "Fatal Error during Processing";
+    private final String ERR_MSG_TASK = "An error during the processing occurred, please retry or post an issue with details";
     private final String DEFAULT_VALUE = "__empty__";
+    private final String SUCCESS_TITLE = "Done!";
+    private final String SUCCESS_MSG = "Finished the templating task. Generated a PDF as well.";
 
     /**
      * Standard ctor, takes View as param to reference.
@@ -61,9 +66,14 @@ public class HomeViewController {
         if (isDocSet) {
             if (!_kvManager.isEmpty()) {
                 HashMap<String, String> mappings = _kvManager.zip();
-                _docManager.replaceVariables(fNameExt, mappings);
-            } else { _hv.showError(ERR_TITLE_NOVARS, ERR_MSG_NOVARS); }
-        } else { _hv.showError(ERR_TITLE_NODOC, ERR_MSG_NODOC); }
+                int rv = _docManager.replaceVariables(fNameExt, mappings);
+                if (rv == 0) {
+                    _hv.showMessage(AlertType.INFORMATION, SUCCESS_TITLE, SUCCESS_MSG);
+                } else {
+                    _hv.showMessage(AlertType.ERROR, ERR_TITLE_TASK, ERR_MSG_TASK);
+                }
+            } else { _hv.showMessage(AlertType.ERROR, ERR_TITLE_NOVARS, ERR_MSG_NOVARS); }
+        } else { _hv.showMessage(AlertType.ERROR, ERR_TITLE_NODOC, ERR_MSG_NODOC); }
     }
 
     /**
