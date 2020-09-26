@@ -15,6 +15,7 @@ public class DOCXManager {
 
     private WordprocessingMLPackage _processor;
     private String _fPath;
+    private String _docName;
 
     /**
      * Standard ctor.
@@ -31,6 +32,9 @@ public class DOCXManager {
             File handle = new File(fPath);
             _processor = WordprocessingMLPackage.load(handle);
             _fPath = fPath.substring(0, fPath.lastIndexOf("/"));
+            _docName = handle.getName();
+            int pos = _docName.lastIndexOf(".");
+            _docName = _docName.substring(0, pos);
             return 0;
         } catch (Docx4JException | NullPointerException excep) {
             excep.printStackTrace(); // debug
@@ -49,8 +53,8 @@ public class DOCXManager {
         try {
             VariablePrepare.prepare(_processor);
             _processor.getMainDocumentPart().variableReplace(replacements);
-            File outf = new File(_fPath + "/" + fName + ".docx");
-            toPDF(_processor, new FileOutputStream(_fPath + "/" + fName + ".pdf"));
+            File outf = new File(_fPath + "/" + _docName + "_" + fName + ".docx");
+            toPDF(_processor, new FileOutputStream(_fPath + "/" + _docName + "_" + fName + ".pdf"));
             _processor.save(outf);
             return 0;
         } catch (Exception excep) {

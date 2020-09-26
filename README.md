@@ -21,7 +21,8 @@ If you have feedback or just want to shoutout, hit me up on Twitter @saadat603 :
 ## Future / Planned Features
 - Multilingual support
 	-  General idea is to have a dedicated langauge file with the respective strings translated and loaded at runtime. A Settings panel would need to be implemented as well.
-- ~Auto conversion to PDF~ Done
+- ~Auto conversion to PDF~ ✅
+- Theming
 
 ## Installation & Download
 #### Info:
