@@ -224,12 +224,13 @@ public class HomeView {
     }
 
     /**
-     * Show an Error Dialog.
-     * @param title Title of the Error Dialog.
+     * Show a Dialog.
+     * @param type Type of the Dialog
+     * @param title Title of the Dialog.
      * @param msg Message to display.
      */
-    public void showError(@NonNull String title, @NonNull String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    public void showMessage(Alert.AlertType type, @NonNull String title, @NonNull String msg) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(msg);
         alert.showAndWait();
