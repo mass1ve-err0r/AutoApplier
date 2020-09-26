@@ -38,11 +38,16 @@ AutoApplier comes as _shaded_ JAR, meaning it includes all the necessary JavaFX 
 
 At this point you're free to place the application / `JAR` anywhere you like because it's portable for *your system*.
 
-#### Prebuilt Images:
-I provide the following *working\** images with their respective specs:
+I recommend putting it into it's own designated folder because it outputs the modified templates into it's directory.
 
-- macOS (10.15.6 Catalina, AdoptOpenJDK 11.0.8) : Click [HERE](x)
-- Windows (Win10, AdoptOpenJDK 11.0.8) : Click [HERE](x2)
+#### Prebuilt Images:
+I provide the following *working* images with their respective specs:
+
+- macOS (10.15.6 Catalina, AdoptOpenJDK 11.0.8) : Click [HERE](x) \(Not working, uploading soon\)
+- Windows (10 Build 2004, AdoptOpenJDK 11.0.8) : Click [HERE](x2) \(Not working, uploading soon\)
+
+#### Launchers:
+Because Java(FX) is a bit finicky and on my Mac, I provide Launcher scripts for Windows and macOS. If you're using the prebuilt images, they'll ship with their according Launcher.
 
 ## F.A.Q
 #### *Q: How does it work \*exactly\*???*
@@ -67,7 +72,7 @@ A: In no other way than the dependencies being a tad different since docx4j has 
 
 ## Credits:
 - docx4j Team for their amazing work
-- Apache 
+- Apache for FOP
 - JetBrains for their amazing IDE
 - My swedish pigeon gang for the true support™️
 - My friends and family
