@@ -16,11 +16,12 @@ If you have feedback or just want to shoutout, hit me up on Twitter @saadat603 :
 	- Variables in text or tables, both work!
 - Support for custom presets
 	- You can view the example `test.aaconf` to see how it works!
+- Auto-output as docx *and* PDF
 
 ## Future / Planned Features
 - Multilingual support
 	-  General idea is to have a dedicated langauge file with the respective strings translated and loaded at runtime. A Settings panel would need to be implemented as well.
-- Auto-Conversion to PDF
+- ~Auto conversion to PDF~ Done
 
 ## Installation & Download
 #### Info:
